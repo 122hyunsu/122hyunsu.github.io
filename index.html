@@ -143,23 +143,20 @@
       }
     };
 
-    function searchChord() {
-      const input = document.getElementById("searchInput").value.trim();
-      const result = document.getElementById("result");
+function searchChord() {
+  const rawInput = document.getElementById("searchInput").value.trim();
+  const input =
+    rawInput.charAt(0).toUpperCase() + rawInput.slice(1);
 
-      if (!chordData[input]) {
-        result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
-        return;
-      }
+  const result = document.getElementById("result");
 
-      const chord = chordData[input];
+  if (!chordData[input]) {
+    result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
+    return;
+  }
 
-      result.innerHTML = `
-        <h2>${input} 코드</h2>
-        <p>${chord.description}</p>
-        <pre>${chord.position}</pre>
-        <img src="${chord.image}" alt="${input} 코드 잡는 법">
-      `;
+  const chord = chordData[input];
+
 
       result.scrollIntoView({ behavior: "smooth" });
     }
