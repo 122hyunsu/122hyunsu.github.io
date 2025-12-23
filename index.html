@@ -142,6 +142,16 @@
         image: "images/Fsharp.png"
       }
     };
+    const noteKor = {
+  C: "도", "C#": "도#", Db: "레b",
+  D: "레", "D#": "레#", Eb: "미b",
+  E: "미",
+  F: "파", "F#": "파#", Gb: "솔b",
+  G: "솔", "G#": "솔#", Ab: "라b",
+  A: "라", "A#": "라#", Bb: "시b",
+  B: "시"
+};
+
 
 function searchChord() {
   const rawInput = document.getElementById("searchInput").value.trim();
@@ -151,15 +161,16 @@ function searchChord() {
   const result = document.getElementById("result");
 
   if (!chordData[input]) {
-    result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
-    return;
-  }
+    const root = input.replace(/m|maj7|m7|7|sus2|sus4|dim|aug|add9|6|9|11|13/g, "");
+const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
 
-  const chord = chordData[input];
+result.innerHTML = `
+  <h2>${input} 코드 <span class="noteKor">${kor}</span></h2>
+  <p>${chord.description}</p>
+  <pre>${chord.position}</pre>
+  <img src="${chord.image}" alt="${input} 코드 잡는 법">
+`;
 
-
-      result.scrollIntoView({ behavior: "smooth" });
-    }
   </script>
 
 </body>
