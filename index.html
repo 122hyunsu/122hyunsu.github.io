@@ -1,39 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>기타 & 피아노 코드 모음</title>
+  <meta charset="UTF-8" />
+  <title>코드 검색사이트 | 기타 & 피아노 코드</title>
+  <meta name="description" content="기타와 피아노 코드를 검색하면 코드 설명과 잡는 위치를 이미지와 글로 확인할 수 있습니다.">
 
+  <!-- AdSense (이미 있다면 유지) -->
   <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7200452402177060"
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
     crossorigin="anonymous"></script>
-</head>
-
 
   <style>
-    /* 기본 스타일 */
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
     }
 
-    input {
-      padding: 6px;
-      font-size: 14px;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li {
-      margin: 6px 0;
-    }
-
-    /* 로비 화면 */
     .hero {
       height: 90vh;
       display: flex;
@@ -41,118 +24,146 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: linear-gradient(180deg, #ffffff, #f3f3f3);
       padding: 20px;
     }
 
-    .hero h1 {
+    h1 {
       font-size: 40px;
       margin-bottom: 10px;
     }
 
-    .hero p {
-      font-size: 16px;
+    .subtitle {
       color: #555;
       margin-bottom: 20px;
     }
 
-    .hero input {
+    input {
       padding: 10px;
-      width: 220px;
+      font-size: 16px;
+      width: 240px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .scroll {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #777;
+    }
+
+    .result {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .result h2 {
       margin-bottom: 10px;
     }
 
-    .hero a {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 10px 18px;
-      border: 1px solid #000;
-      text-decoration: none;
-      color: #000;
-      font-size: 14px;
+    .result p {
+      margin-bottom: 15px;
     }
 
-    .scroll-hint {
-      margin-top: 30px;
-      font-size: 12px;
-      color: #888;
+    .result pre {
+      background: #f4f4f4;
+      padding: 15px;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+
+    .result img {
+      max-width: 100%;
+      margin-top: 20px;
+    }
+
+    footer {
+      margin: 80px 0 30px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #333;
+      text-decoration: none;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- 로비 섹션 -->
-  <div class="hero">
-    <h1>기타 & 피아노 코드</h1>
-    <p>자주 쓰이는 기본 코드들을 한눈에 정리했습니다</p>
+  <!-- 메인 화면 -->
+  <section class="hero">
+    <h1>코드 검색사이트</h1>
+    <p class="subtitle">
+      코드를 검색하면 설명과 잡는 위치를 바로 확인할 수 있습니다
+    </p>
 
     <input
-  type="text"
-  id="searchInput"
-  placeholder="예: C, Dm, F#, 플랫은 소문자b로"
-  onkeyup="searchChord()"
-  onkeydown="handleEnter(event)"
->
+      type="text"
+      id="searchInput"
+      placeholder="예: C, Dm, F#"
+    />
+    <button onclick="searchChord()">검색</button>
 
-    <a href="#codes-list">전체 코드 보기</a>
-    <div class="scroll-hint">아래로 스크롤 ↓</div>
-  </div>
+    <div class="scroll">아래로 스크롤 ↓</div>
+  </section>
 
-  <!-- 본문 코드 목록 -->
-  <main id="codes-list" style="padding: 20px;">
+  <!-- 결과 영역 -->
+  <section id="result" class="result"></section>
 
-    <h2>메이저 코드</h2>
-    <ul>
-      <li class="chord-item"><a href="C.html">C</a></li>
-      <li class="chord-item"><a href="D.html">D</a></li>
-      <li class="chord-item"><a href="E.html">E</a></li>
-      <li class="chord-item"><a href="F.html">F</a></li>
-      <li class="chord-item"><a href="G.html">G</a></li>
-      <li class="chord-item"><a href="A.html">A</a></li>
-      <li class="chord-item"><a href="B.html">B</a></li>
-    </ul>
+  <!-- 푸터 -->
+  <footer>
+    <a href="privacy.html">개인정보처리방침</a>
+  </footer>
 
-    <h2>마이너 코드</h2>
-    <ul>
-      <li class="chord-item"><a href="Cm.html">Cm</a></li>
-      <li class="chord-item"><a href="Dm.html">Dm</a></li>
-      <li class="chord-item"><a href="Em.html">Em</a></li>
-      <li class="chord-item"><a href="Fm.html">Fm</a></li>
-      <li class="chord-item"><a href="Gm.html">Gm</a></li>
-      <li class="chord-item"><a href="Am.html">Am</a></li>
-      <li class="chord-item"><a href="Bm.html">Bm</a></li>
-    </ul>
+  <!-- 코드 데이터 & 로직 -->
+  <script>
+    const chordData = {
+      C: {
+        description: "C 메이저 코드입니다. 밝고 안정적인 느낌을 주며 초보자가 가장 먼저 배우는 코드입니다.",
+        position: "기타: 1번줄 개방\n피아노: 도 - 미 - 솔",
+        image: "images/C.png"
+      },
+      Dm: {
+        description: "D 마이너 코드입니다. 감성적인 분위기의 곡에서 자주 사용됩니다.",
+        position: "기타: 1프렛 사용\n피아노: 레 - 파 - 라",
+        image: "images/Dm.png"
+      },
+      "F#": {
+        description: "F# 메이저 코드입니다. 바레 코드로 등장하며 난이도가 있습니다.",
+        position: "기타: 2프렛 바레\n피아노: 파# - 라# - 도#",
+        image: "images/Fsharp.png"
+      }
+    };
 
-    <hr>
+    function searchChord() {
+      const input = document.getElementById("searchInput").value.trim();
+      const result = document.getElementById("result");
 
-    <p><a href="privacy.html">개인정보처리방침</a></p>
+      if (!chordData[input]) {
+        result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
+        return;
+      }
 
-  </main>
+      const chord = chordData[input];
 
-  <!-- 검색 스크립트 -->
-  
-<script>
-  function searchChord() {
-    const input = document.getElementById("searchInput");
-    const filter = input.value.toUpperCase();
-    const items = document.getElementsByClassName("chord-item");
+      result.innerHTML = `
+        <h2>${input} 코드</h2>
+        <p>${chord.description}</p>
+        <pre>${chord.position}</pre>
+        <img src="${chord.image}" alt="${input} 코드 잡는 법">
+      `;
 
-    for (let i = 0; i < items.length; i++) {
-      const text = items[i].innerText.toUpperCase();
-      items[i].style.display = text.includes(filter) ? "" : "none";
+      result.scrollIntoView({ behavior: "smooth" });
     }
-  }
-
-  function handleEnter(event) {
-    if (event.key === "Enter") {
-      document.getElementById("codes-list").scrollIntoView({
-        behavior: "smooth"
-      });
-    }
-  }
-</script>
-
+  </script>
 
 </body>
 </html>
