@@ -11,6 +11,39 @@
     crossorigin="anonymous"></script>
 
   <style>
+    /* 검색 결과 카드 */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.card-sub {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.card pre {
+  background: #f7f7f7;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -165,10 +198,14 @@ function searchChord() {
 const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
 
 result.innerHTML = `
-  <h2>${input} 코드 <span class="noteKor">${kor}</span></h2>
-  <p>${chord.description}</p>
-  <pre>${chord.position}</pre>
-  <img src="${chord.image}" alt="${input} 코드 잡는 법">
+  <div class="card">
+    <div class="card-title">${input} 코드 <span class="noteKor">${kor}</span></div>
+    <div class="card-sub">${chord.description}</div>
+
+    <img src="${chord.image}" alt="${input} 코드 이미지">
+
+    <pre>${chord.position}</pre>
+  </div>
 `;
 
   </script>
