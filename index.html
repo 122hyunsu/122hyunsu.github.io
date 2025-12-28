@@ -173,17 +173,28 @@
       const root = input.replace(/m|maj7|m7|7|sus2|sus4|dim|aug|add9|6|9|11|13/g, "");
       const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
 
-      result.innerHTML = `
-        <div class="card">
-          <div class="card-title">
-            ${input} 코드 <span class="noteKor">${kor}</span>
-          </div>
-          <div class="card-sub">${chord.description}</div>
-          <img src="${chord.image}" alt="${input} 코드 이미지">
-          <pre>${chord.position}</pre>
-        </div>
-      `;
-    }
+     result.innerHTML = `
+  <div class="card">
+    <div class="card-title">
+      ${input} 코드 <span class="noteKor">${kor}</span>
+    </div>
+
+    <div class="card-sub">${chord.description}</div>
+
+    <div style="font-size:12px;color:#999;margin:6px 0;">
+      (디버그) 이미지 경로: ${chord.image}
+    </div>
+
+    <img
+      src="${chord.image}"
+      alt="${input} 코드 이미지"
+      onerror="this.outerHTML='<div style=&quot;color:red;font-size:13px;&quot;>이미지 로드 실패: ' + this.src + '</div>';"
+    >
+
+    <pre>${chord.position}</pre>
+  </div>
+`;
+
   </script>
 
 </body>
