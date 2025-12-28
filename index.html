@@ -159,16 +159,18 @@
   <!-- 코드 데이터 & 로직 -->
   <script>
     const chordData = {
-      C: {
-        description: "C 메이저 코드입니다. 밝고 안정적인 느낌을 주며 초보자가 가장 먼저 배우는 코드입니다.",
-        position: "기타: 1번줄 개방\n피아노: 도 - 미 - 솔",
-        image: "images/C.png"
-      },
-      Dm: {
-        description: "D 마이너 코드입니다. 감성적인 분위기의 곡에서 자주 사용됩니다.",
-        position: "기타: 1프렛 사용\n피아노: 레 - 파 - 라",
-        image: "images/Dm.png"
-      },
+     C: {
+  description: "C 메이저 코드",
+  image: "C.png",
+  position: "기타 / 피아노 설명"
+},
+
+      Cm: {
+  description: "C 마이너 코드",
+  image: "Cm.png",
+  position: "기타 / 피아노 설명"
+},
+
       "F#": {
         description: "F# 메이저 코드입니다. 바레 코드로 등장하며 난이도가 있습니다.",
         position: "기타: 2프렛 바레\n피아노: 파# - 라# - 도#",
@@ -193,20 +195,32 @@ function searchChord() {
 
   const result = document.getElementById("result");
 
+  // ❌ 코드 없을 때
   if (!chordData[input]) {
-    const root = input.replace(/m|maj7|m7|7|sus2|sus4|dim|aug|add9|6|9|11|13/g, "");
-const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
+    result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
+    return;
+  }
 
-result.innerHTML = `
-  <div class="card">
-    <div class="card-title">${input} 코드 <span class="noteKor">${kor}</span></div>
-    <div class="card-sub">${chord.description}</div>
+  // ✅ 코드 있을 때
+  const chord = chordData[input];
 
-    <img src="${chord.image}" alt="${input} 코드 이미지">
+  const root = input.replace(/m|maj7|m7|7|sus2|sus4|dim|aug|add9|6|9|11|13/g, "");
+  const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
 
-    <pre>${chord.position}</pre>
-  </div>
-`;
+  result.innerHTML = `
+    <div class="card">
+      <div class="card-title">
+        ${input} 코드 <span class="noteKor">${kor}</span>
+      </div>
+
+      <div class="card-sub">${chord.description}</div>
+
+      <img src="${chord.image}" alt="${input} 코드 이미지">
+
+      <pre>${chord.position}</pre>
+    </div>
+  `;
+}
 
   </script>
 
