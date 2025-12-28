@@ -5,45 +5,7 @@
   <title>코드 검색사이트 | 기타 & 피아노 코드</title>
   <meta name="description" content="기타와 피아노 코드를 검색하면 코드 설명과 잡는 위치를 이미지와 글로 확인할 수 있습니다.">
 
-  <!-- AdSense (이미 있다면 유지) -->
-  <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXX"
-    crossorigin="anonymous"></script>
-
   <style>
-    /* 검색 결과 카드 */
-.card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 40px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
-
-.card-title {
-  font-size: 22px;
-  margin-bottom: 8px;
-}
-
-.card-sub {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 16px;
-}
-
-.card img {
-  max-width: 100%;
-  border-radius: 8px;
-  margin: 16px 0;
-}
-
-.card pre {
-  background: #f7f7f7;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -84,12 +46,6 @@
       cursor: pointer;
     }
 
-    .scroll {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #777;
-    }
-
     .result {
       max-width: 700px;
       margin: 60px auto;
@@ -97,24 +53,45 @@
       text-align: center;
     }
 
-    .result h2 {
-      margin-bottom: 10px;
+    /* 카드 스타일 */
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     }
 
-    .result p {
-      margin-bottom: 15px;
+    .card-title {
+      font-size: 22px;
+      margin-bottom: 8px;
     }
 
-    .result pre {
-      background: #f4f4f4;
-      padding: 15px;
-      text-align: left;
-      white-space: pre-wrap;
+    .noteKor {
+      font-size: 14px;
+      color: #666;
+      font-weight: normal;
+      margin-left: 8px;
     }
 
-    .result img {
+    .card-sub {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .card img {
       max-width: 100%;
-      margin-top: 20px;
+      border-radius: 8px;
+      margin: 16px 0;
+    }
+
+    .card pre {
+      background: #f7f7f7;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      white-space: pre-wrap;
+      text-align: left;
     }
 
     footer {
@@ -131,97 +108,82 @@
 </head>
 <body>
 
-  <!-- 메인 화면 -->
+  <!-- 메인 -->
   <section class="hero">
     <h1>코드 검색사이트</h1>
-    <p class="subtitle">
-      코드를 검색하면 설명과 잡는 위치를 바로 확인할 수 있습니다
-    </p>
+    <p class="subtitle">코드를 검색하면 설명과 잡는 위치를 바로 확인할 수 있습니다</p>
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="예: C, Dm, F#"
-    />
+    <input id="searchInput" type="text" placeholder="예: C, Cm, F#" />
     <button onclick="searchChord()">검색</button>
-
-    <div class="scroll">아래로 스크롤 ↓</div>
   </section>
 
-  <!-- 결과 영역 -->
+  <!-- 결과 -->
   <section id="result" class="result"></section>
 
-  <!-- 푸터 -->
   <footer>
     <a href="privacy.html">개인정보처리방침</a>
   </footer>
 
-  <!-- 코드 데이터 & 로직 -->
   <script>
+    /* 코드 데이터 */
     const chordData = {
-     C: {
-  description: "C 메이저 코드",
-  image: "C.png",
-  position: "기타 / 피아노 설명"
-},
-
+      C: {
+        description: "C 메이저 코드",
+        image: "C.png",
+        position: "기타: 개방 코드\n피아노: 도 - 미 - 솔"
+      },
       Cm: {
-  description: "C 마이너 코드",
-  image: "Cm.png",
-  position: "기타 / 피아노 설명"
-},
-
+        description: "C 마이너 코드",
+        image: "Cm.png",
+        position: "기타: 바레 코드\n피아노: 도 - 미b - 솔"
+      },
       "F#": {
-        description: "F# 메이저 코드입니다. 바레 코드로 등장하며 난이도가 있습니다.",
-        position: "기타: 2프렛 바레\n피아노: 파# - 라# - 도#",
-        image: "images/Fsharp.png"
+        description: "F# 메이저 코드",
+        image: "Fsharp.png",
+        position: "기타: 바레 코드\n피아노: 파# - 라# - 도#"
       }
     };
+
+    /* 계이름 */
     const noteKor = {
-  C: "도", "C#": "도#", Db: "레b",
-  D: "레", "D#": "레#", Eb: "미b",
-  E: "미",
-  F: "파", "F#": "파#", Gb: "솔b",
-  G: "솔", "G#": "솔#", Ab: "라b",
-  A: "라", "A#": "라#", Bb: "시b",
-  B: "시"
-};
+      C: "도", "C#": "도#", Db: "레b",
+      D: "레", "D#": "레#", Eb: "미b",
+      E: "미",
+      F: "파", "F#": "파#", Gb: "솔b",
+      G: "솔", "G#": "솔#", Ab: "라b",
+      A: "라", "A#": "라#", Bb: "시b",
+      B: "시"
+    };
 
+    function searchChord() {
+      const rawInput = document.getElementById("searchInput").value.trim();
+      if (!rawInput) return;
 
-function searchChord() {
-  const rawInput = document.getElementById("searchInput").value.trim();
-  const input =
-    rawInput.charAt(0).toUpperCase() + rawInput.slice(1);
+      const input =
+        rawInput.charAt(0).toUpperCase() + rawInput.slice(1);
 
-  const result = document.getElementById("result");
+      const result = document.getElementById("result");
 
-  // ❌ 코드 없을 때
-  if (!chordData[input]) {
-    result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
-    return;
-  }
+      if (!chordData[input]) {
+        result.innerHTML = "<p>해당 코드를 찾을 수 없습니다.</p>";
+        return;
+      }
 
-  // ✅ 코드 있을 때
-  const chord = chordData[input];
+      const chord = chordData[input];
+      const root = input.replace(/m|maj7|m7|7|sus2|sus4|dim|aug|add9|6|9|11|13/g, "");
+      const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
 
-  const root = input.replace(/m|maj7|m7|7|sus2|sus4|dim|aug|add9|6|9|11|13/g, "");
-  const kor = noteKor[root] ? `${root}=${noteKor[root]}` : "";
-
-  result.innerHTML = `
-    <div class="card">
-      <div class="card-title">
-        ${input} 코드 <span class="noteKor">${kor}</span>
-      </div>
-
-      <div class="card-sub">${chord.description}</div>
-
-      <img src="${chord.image}" alt="${input} 코드 이미지">
-
-      <pre>${chord.position}</pre>
-    </div>
-  `;
-}
-
+      result.innerHTML = `
+        <div class="card">
+          <div class="card-title">
+            ${input} 코드 <span class="noteKor">${kor}</span>
+          </div>
+          <div class="card-sub">${chord.description}</div>
+          <img src="${chord.image}" alt="${input} 코드 이미지">
+          <pre>${chord.position}</pre>
+        </div>
+      `;
+    }
   </script>
 
 </body>
